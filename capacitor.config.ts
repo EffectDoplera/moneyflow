@@ -5,8 +5,7 @@ const config: CapacitorConfig = {
   appName: "Money Flow",
   webDir: "dist",
   server: {
-    url: "http://192.168.1.13:5173",
-    cleartext: true,
+    androidScheme: "https",
   },
   plugins: {
     SplashScreen: {
