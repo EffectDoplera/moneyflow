@@ -37,7 +37,11 @@ export const CreateIncomeForm = ({
     createIncome: state.createIncome,
   }));
   const { incomeCategories } = useIncomeCategoriesStore();
-  const { order: accountsOrder, accounts } = useAccountsStore();
+  const {
+    order: accountsOrder,
+    accounts,
+    updateAccountOrder,
+  } = useAccountsStore();
   const {
     currencies: { currencies },
   } = useCurrenciesStore();
@@ -110,6 +114,7 @@ export const CreateIncomeForm = ({
       categoryId: income.categoryId,
       datetime: DateTime.fromISO(income.datetime),
     });
+    updateAccountOrder(income.accountId, 0);
     resetCreateIncomeFormState();
     navigate(-1);
   };

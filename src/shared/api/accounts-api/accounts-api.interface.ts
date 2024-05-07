@@ -6,6 +6,7 @@ import {
   AccountDTO,
   AccountID,
   UpdateAccountDTO,
+  UpdateAccountOrderDTO,
 } from "./dtos";
 
 export interface AccountsAPI {
@@ -13,6 +14,10 @@ export interface AccountsAPI {
   setAccounts(accounts: AccountsDTO): Promise<void>;
   createAccount(account: CreateAccountDTO): Promise<AccountDTO>;
   updateAccount(id: AccountID, currency: UpdateAccountDTO): Promise<AccountDTO>;
+  updateAccountOrder(
+    id: AccountID,
+    position: UpdateAccountOrderDTO,
+  ): Promise<AccountsDTO>;
   deleteAccount(id: AccountID): Promise<void>;
   deleteAccountsByCurrency(currencyId: CurrencyID): Promise<AccountID[]>;
 }

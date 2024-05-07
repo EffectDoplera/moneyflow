@@ -76,6 +76,21 @@ export class PreferencesAccountsAPI implements AccountsAPI {
     return accounts[id];
   }
 
+  async updateAccountOrder(
+    id: AccountID,
+    position: number,
+  ): Promise<AccountsDTO> {
+    const state = await this.getState();
+    const { order } = state;
+    const prevPositin = order.findIndex((accountId) => accountId === id);
+    order.splice(prevPositin, 1);
+    order.splice(position, 0, id);
+
+    await this.setState(state);
+
+    return state;
+  }
+
   async deleteAccount(id: AccountID) {
     const state = await this.getState();
     const { order, accounts } = state;

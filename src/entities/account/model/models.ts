@@ -25,6 +25,8 @@ export interface CreateAccount {
 
 export type UpdateAccount = CreateAccount;
 
+export type UpdateAccountOrder = number;
+
 export interface Account extends CreateAccount {
   id: AccountID;
   createdAt: DateTime;

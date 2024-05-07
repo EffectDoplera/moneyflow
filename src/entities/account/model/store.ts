@@ -10,12 +10,17 @@ import {
   Accounts,
   CreateAccount,
   UpdateAccount,
+  UpdateAccountOrder,
 } from "./models";
 
 interface AccountsStoreState extends Accounts {
   fetchAccounts(): Promise<void>;
   createAccount(account: CreateAccount): Promise<void>;
   updateAccount(id: AccountID, account: UpdateAccount): Promise<void>;
+  updateAccountOrder(
+    id: AccountID,
+    position: UpdateAccountOrder,
+  ): Promise<void>;
   deleteAccount(id: AccountID): Promise<void>;
   deleteAccountsByCurrency(currencyId: string): Promise<AccountID[]>;
   getAccount(id: AccountID): Account;
@@ -61,6 +66,15 @@ export const useAccountsStore = create<AccountsStoreState>()(
             createdAt: DateTime.fromMillis(updatedAccount.createdAt),
           },
         },
+      }));
+    },
+    async updateAccountOrder(id, position) {
+      const updatedAccounts = await accountsApi.updateAccountOrder(
+        id,
+        position,
+      );
+      set(() => ({
+        order: updatedAccounts.order,
       }));
     },
     async deleteAccount(id) {

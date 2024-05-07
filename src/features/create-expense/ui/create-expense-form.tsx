@@ -37,7 +37,11 @@ export const CreateExpenseForm = ({
     createExpense: state.createExpense,
   }));
   const { expenseCategories } = useExpenseCategoriesStore();
-  const { order: accountsOrder, accounts } = useAccountsStore();
+  const {
+    order: accountsOrder,
+    accounts,
+    updateAccountOrder,
+  } = useAccountsStore();
   const {
     currencies: { currencies },
   } = useCurrenciesStore();
@@ -110,6 +114,7 @@ export const CreateExpenseForm = ({
       categoryId: expense.categoryId,
       datetime: DateTime.fromISO(expense.datetime),
     });
+    updateAccountOrder(expense.accountId, 0);
     resetCreateExpenseFormState();
     navigate(-1);
   };
